@@ -10,7 +10,7 @@ class ExternalApiController < ApplicationController
       response = response.body
       response = JSON.parse(response)
       response = response["results"][0]["products"][0]["brand_name"]
-      render json: response, status: :ok
+      render json: { drug_name: response }, status: :ok
     else
 
       render json: { error: 'Failed to fetch JSON' }, status: :internal_server_error
