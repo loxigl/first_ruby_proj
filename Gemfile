@@ -4,7 +4,9 @@ ruby "3.2.2"
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'pg'
 gem 'httparty'
-
+gem 'rswag'
+gem 'rswag-api'
+gem 'rswag-ui'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.0"
 
@@ -46,6 +48,7 @@ end
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-
+  gem 'rspec-rails'
+  gem 'rswag-specs'
 end
 

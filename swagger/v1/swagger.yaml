@@ -1,0 +1,76 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/consultation_requests":
+
+    post:
+      parameters:
+        - in: query
+          name: params
+          required: true
+          schema:
+            type: string
+          example: '{"patient_id":2,
+                      "consultation_request": {
+                      "text": "Хочу консультацию"
+                      }
+                    }'
+
+
+      summary: создание запроса на консультацию
+      responses:
+        '200':
+          description: successful
+  "/drug":
+    get:
+      summary: Получение названия лекарства с внешнего API
+      responses:
+        '200':
+          description: successful
+
+  "/patients/{patient_id}/recommendations":
+    parameters:
+      - name: patient_id
+        in: path
+        description: patient_id
+        required: true
+        schema:
+          type: string
+
+    get:
+      summary: получение списка рекомендаций для конкретного пациента
+      responses:
+        '200':
+          description: successful
+  "/consultation_requests/{consultation_request_id}/recommendations":
+    parameters:
+      - name: consultation_request_id
+        in: path
+        description: consultation_request_id
+        required: true
+        schema:
+          type: string
+      -  name: params
+         in: query
+         required: true
+         schema:
+           type: string
+         example: '{"patient_id":2,
+                      "recommendation": {
+                        "text": "Рекомендую подлечиться"
+                      }
+                    }'
+
+    post:
+      summary: создание рекомендации для конкретного запроса на консультацию
+      responses:
+        '200':
+          description: successful
+servers:
+  - url: http://{defaultHost}
+    variables:
+      defaultHost:
+        default: localhost:3000
