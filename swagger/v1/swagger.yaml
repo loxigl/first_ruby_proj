@@ -5,25 +5,26 @@ info:
   version: v1
 paths:
   "/consultation_requests":
-
     post:
-      parameters:
-        - in: query
-          name: params
-          required: true
-          schema:
-            type: string
-          example: '{"patient_id":2,
-                      "consultation_request": {
-                      "text": "Хочу консультацию"
-                      }
-                    }'
-
-
       summary: создание запроса на консультацию
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                patient_id:
+                  type: integer
+                consultation_request:
+                  type: object
+                  properties:
+                    text:
+                      type: string
+
       responses:
-        '200':
-          description: successful
+        '201':
+          description: Created
   "/drug":
     get:
       summary: Получение названия лекарства с внешнего API
@@ -38,7 +39,7 @@ paths:
         description: patient_id
         required: true
         schema:
-          type: string
+          type: integer
 
     get:
       summary: получение списка рекомендаций для конкретного пациента
@@ -53,22 +54,28 @@ paths:
         required: true
         schema:
           type: string
-      -  name: params
-         in: query
-         required: true
-         schema:
-           type: string
-         example: '{"patient_id":2,
-                      "recommendation": {
-                        "text": "Рекомендую подлечиться"
-                      }
-                    }'
+
 
     post:
-      summary: создание рекомендации для конкретного запроса на консультацию
+      summary: создание запроса на консультацию
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                patient_id:
+                  type: integer
+                recommendation:
+                  type: object
+                  properties:
+                    text:
+                      type: string
+
       responses:
-        '200':
-          description: successful
+        '201':
+          description: Created
 servers:
   - url: http://{defaultHost}
     variables:
