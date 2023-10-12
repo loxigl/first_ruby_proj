@@ -65,8 +65,6 @@ paths:
             schema:
               type: object
               properties:
-                patient_id:
-                  type: integer
                 recommendation:
                   type: object
                   properties:
